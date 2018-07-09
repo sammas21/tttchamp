@@ -86,7 +86,7 @@ function checkWinner(uarr){
 }
 
 
-http.listen(4000, ()=>{
-    console.log('Server started at http://localhost:1000');
+http.listen(process.env.PORT || 3000, function () {
+    console.log('listening on', http.address().port);
 });
 
