@@ -30,13 +30,12 @@ io.on('connection', function(socket){
             player2.id = socket.id;
             player2.turn = false;
             socket.emit('playerAdded', player2);
+            socket.broadcast.emit('startgame', 'data');
             console.log(player2.name, player2.id);
         } else {
           //  socket.emit('disconnect', 'no space');
         }
    
-    
-
     socket.on('onTurn', function(data){
         if (data[0] === 'sam') {
             console.log(data[2]);
