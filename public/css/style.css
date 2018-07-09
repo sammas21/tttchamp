@@ -3,8 +3,27 @@
     margin-right: 3px;
     margin-top: 3px;
     margin-left: 3px;
-    height: 100px;
-    width: 100px;
+    height: 75px;
+    width: 75px;
     padding: 6px;
     border-radius: 0;
+}
+
+.outer {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 270px;
+  /*whatever width you want*/
 }
