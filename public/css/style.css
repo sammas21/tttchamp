@@ -1,0 +1,10 @@
+.btnGrid{
+    margin-bottom: 3px;
+    margin-right: 3px;
+    margin-top: 3px;
+    margin-left: 3px;
+    height: 100px;
+    width: 100px;
+    padding: 6px;
+    border-radius: 0;
+}
