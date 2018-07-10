@@ -35,6 +35,8 @@ io.on('connection', function(socket){
         } else {
           //  socket.emit('disconnect', 'no space');
         }
+    
+    
    
     socket.on('onTurn', function(data){
         if (data[0] === 'sam') {
@@ -44,8 +46,9 @@ io.on('connection', function(socket){
             console.log(data[2]);
             socket.broadcast.emit('nextTurn', [true, false, data[1], data[2]]);
         }
-        if(checkWinner(data[3])){
-            io.sockets.emit('matchend', data[0]);
+        var checkerArr = checkWinner(data[3]);
+        if(checkerArr[0]){
+            io.sockets.emit('matchend', [data[0], checkerArr[1]]);
         }
             
         
@@ -90,8 +93,27 @@ function checkWinner(uarr){
     var w7 = [13, 23, 33];
     var w8 = [31, 22, 13];
 
-    return isS(w1, uarr) || isS(w2, uarr) || isS(w3, uarr) || isS(w4, uarr)||
-        isS(w5, uarr) || isS(w6, uarr) || isS(w7, uarr) || isS(w8, uarr);
+    if (isS(w1, uarr)){
+        return [true, w1];
+    }else if (isS(w2, uarr)){
+        return [true, w2];
+    } else if (isS(w3, uarr)) {
+        return [true, w3];
+    } else if (isS(w4, uarr)) {
+        return [true, w4];
+    } else if (isS(w5, uarr)) {
+        return [true, w5];
+    } else if (isS(w6, uarr)) {
+        return [true, w6];
+    } else if (isS(w7, uarr)) {
+        return [true, w7];
+    } else if (isS(w8, uarr)) {
+        return [true, w8];
+    }else{
+        return [false,""];
+    }
+    //return isS(w1, uarr) || isS(w2, uarr) || isS(w3, uarr) || isS(w4, uarr)||
+    //    isS(w5, uarr) || isS(w6, uarr) || isS(w7, uarr) || isS(w8, uarr);
 }
 
 

@@ -8,19 +8,34 @@ $(function (){
     var currentPlayer = false;
     var playerSign="";
     var playerName;
+    var username="default";
     var arrP1 = [];
 
+
+    var $username = $('#username');
+    var $btnLogin = $('#loginBtn');
     var $inp = $("#inputMsg");
     var $inpBtn = $("#sendBtn");
     var $msgBox = $("#chatBox");
     var $btnG = $(".btnGrid");
     var $instMsg = $('#inst');
 
+    
+
     $( document ).ready(function() {
         $btnG.prop('disabled', true);
+        $inpBtn.prop('disabled', true);
+        $msgBox.prop('disabled', true);
         $("#loginModal").modal();
     });
 
+    $btnLogin.click(function(){
+        username = $username.val();
+        if(username!=="default"||username!==""){
+            $inpBtn.prop('disabled', false);
+            $msgBox.prop('disabled', false);
+        }
+    });
 
 
     socket.on('playerAdded', function (data) {
@@ -33,11 +48,11 @@ $(function (){
             if(currentPlayer===true){
                 $instMsg.html('Its your turn '+playerSign);
             }else{
-                $instMsg.html('Wait your turn ' + playerSign);
+                $instMsg.html('Wait for your turn ' + playerSign);
             }
         }else{
             $btnG.prop('disabled', true);
-            $instMsg.html('Waiting for a player to join ...');
+            $instMsg.html('Waiting for a player to join ');
         }
     });  
     
@@ -66,7 +81,7 @@ $(function (){
             currentPlayer = false;
             this.innerText = playerSign;
             console.log(arrP1);
-            $instMsg.html('Wait for you turn '+ playerSign);
+            $instMsg.html('Wait for your turn '+ playerSign);
             $(this).prop('disabled', true);
             socket.emit('onTurn', [playerName, $(this).val(), playerSign, arrP1]);  
         } 
@@ -74,14 +89,18 @@ $(function (){
 
     socket.on('matchend', function (data) {
         $btnG.prop('disabled', true);
-        $instMsg.html((data === playerName)?'You won the match':'Better luck next time');
+        $instMsg.html((data[0] === playerName)?'You won the match':'Better luck next time');
+        data[1].forEach(elm => {
+            $(`#${elm}`).removeClass("btn-primary");
+            $(`#${elm}`).addClass("btn-success");
+        });
     });
 
     ////// Chating logic
 
     $inpBtn.click(function(){
         if($inp.val()!==""){
-            socket.emit('chat', [playerName, $inp.val()]);
+            socket.emit('chat', [username, $inp.val()]);
             $inp.val("");
         }
 
