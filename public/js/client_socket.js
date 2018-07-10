@@ -10,8 +10,18 @@ $(function (){
     var playerName;
     var arrP1 = [];
 
+    var $inp = $("#inputMsg");
+    var $inpBtn = $("#sendBtn");
+    var $msgBox = $("#chatBox");
     var $btnG = $(".btnGrid");
     var $instMsg = $('#inst');
+
+    $( document ).ready(function() {
+        $btnG.prop('disabled', true);
+        $("#loginModal").modal();
+    });
+
+
 
     socket.on('playerAdded', function (data) {
         //console.log(1111+data.name, data.id);
@@ -67,9 +77,21 @@ $(function (){
         $instMsg.html((data === playerName)?'You won the match':'Better luck next time');
     });
 
+    ////// Chating logic
 
+    $inpBtn.click(function(){
+        if($inp.val()!==""){
+            socket.emit('chat', [playerName, $inp.val()]);
+            $inp.val("");
+        }
 
-    
+    });
+
+    socket.on('message', function(data){
+        console.log('message Recieved');
+        $msgBox.html(`<b>${data[0]}</b> : ${data[1]}`);
+    });
+        
 
     
 });

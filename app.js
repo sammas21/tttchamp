@@ -50,12 +50,22 @@ io.on('connection', function(socket){
             
         
     });    
+
+    ////Chating Logic
+    socket.on('chat', function(data){
+        socket.broadcast.emit('message',data);
+        console.log(`<b>${data[0]}</b> : ${data[1]}`);
+    });
+
+
+
   
     socket.on('disconnect', function(){
         clients--;
         //users.pop(data);
         console.log(`${clients} ${clients>1?'clients':'client'} connected`);
     });
+
 });
 
 function isS(sub, arr){
@@ -85,7 +95,7 @@ function checkWinner(uarr){
 }
 
 
-http.listen(process.env.PORT || 3000, function () {
+http.listen(process.env.PORT || 4000, function () {
     console.log('listening on', http.address().port);
 });
 

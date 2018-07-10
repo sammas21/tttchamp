@@ -27,3 +27,28 @@
   width: 270px;
   /*whatever width you want*/
 }
+
+.inputG{
+  margin-bottom: 0px!important;
+}
+
+.playerRow{
+  margin-bottom: 35px!important;
+}
+
+.rightP{
+  margin-right: 10px;
+}
+
+.usernameInput{
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+  
+}
+
+#loginModal{
+  height: 90%;
+  width: 90%;
+}

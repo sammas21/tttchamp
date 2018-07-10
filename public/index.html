@@ -19,11 +19,32 @@
 
     <body>
         
-        <nav class="navbar fixed-top navbar-light bg-light text-center">
-            <h1 class="font-weight-light light mx-auto d-block text-center">Tic Tac Toe Champ</h1>
-        </nav>
         
+        <nav class="navbar navbar-light bg-light text-center w-100 fixed-top">
+                <h1 class="font-weight-light light mx-auto d-block text-center">Tic Tac Toe Champ</h1>
+        </nav>
+
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Enter a username</h5>
+                  
+                </div>
+                <div class="modal-body text-center">
+                  <input type="text" class="usernameInput">
+                </div>
+                <div class="modal-footer text-center">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Login</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
         <div class="container-fluid">
+            
             <div class="outer">
                 <div class="middle">
                     <div class="inner">
@@ -48,13 +69,52 @@
                         <div id="msgBox">
                             <h4 class="font-weight-light" id="inst"></h4>
                         </div>
+                        <div id="chatBox">
+                            <h4 class="font-weight-light" id="inst"></h4>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+            <div class="row fixed-bottom playerRow">
+                <div class="col-6 leftP">
+                        <div class="username">
+                                <ul class="list-group w-25 list-group-flush">
+                                        <li class="list-group-item align-items-center">
+                                                <img src="images/usericon.svg" style="height: 50px; width:  50px">
+                                          </li>
+                                    <li class="list-group-item align-items-center">
+                                          Player2
+                                          <span class="badge badge-primary badge-pill">0</span>
+                                    </li>
+                                </ul>
+                        </div>
+                </div>
+                <div class="col-6">
+                        <div class="username float-right">
+                                <ul class="list-group w-25 list-group-flush rightP">
+                                        <li class="list-group-item align-items-center">
+                                                <img src="images/usericon.svg" style="height: 50px; width:  50px">
+                                          </li>
+                                    <li class="list-group-item align-items-center">
+                                          Player1
+                                          <span class="badge badge-primary badge-pill">0</span>
+                                    </li>
+                                </ul>
+                        </div>
+                </div>
+            </div>            
                 
-
         </div>
-
+        <form >
+        <div class="inputG input-group mb-3 fixed-bottom">            
+                <input id="inputMsg" type="text" class="form-control" placeholder="Message" aria-label="message" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button id="sendBtn" class="btn btn-outline-secondary" type="button">Send</button>
+                </div>            
+            </div>
+        </form>
         <!-- Client side chat application script -->
         <script src="js/client_socket.js"></script>
 
